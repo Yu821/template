@@ -1,0 +1,136 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+# Load libraries
+
+```{r}
+# a
+```
+
+```{r}
+install.packages("xfun")
+```
+
+
+```{r}
+library(tidyverse)
+library (MASS)
+# library(readr)
+# library(haven)
+```
+
+
+# Linear Regression
+
+## Linear regression
+
+```{r}
+data(Boston)
+
+# head(Boston,1)
+```
+
+```{r}
+model <- lm(crim ~ rm+age, data = Boston)
+summary(model)
+```
+
+
+
+## Lasso
+
+## Ridge
+
+
+## Linear Mixed Model (LMM)
+
+Fixed effect = Parameters that are fixed
+Random effect = Parameters that 
+
+```{r, message=false, warning=false}
+
+cd4 <- read_table("./dataset/MACS-cd4-vload0_data.txt", 
+                   col_names = FALSE)[,c(1:6)] 
+names(cd4) <- c("id", "month", "age", "cd4", "cd8", "vload0")
+  
+cd4 <- cd4 %>% 
+  na.omit(vload0)
+
+cd4 <- cd4 %>%
+mutate(log_vload0 = log(vload0))
+
+```
+
+
+```{r}
+library(nlme)
+
+model <- lme(fixed = cd4 ~ log_vload0+month+log_vload0*month,
+             random = ~ 1 | id, data=cd4,
+             correlation=corAR1(form = ~ 1 | id))
+
+
+summary(model)
+```
+
+
+# Bayesian Model
+
+## MCMC
+
+```{r}
+
+```
+
+## Hierachical Bayes
+
+
+
+# Time Series Model
+
+## AR Model
+
+```{r}
+plot(cars)
+```
+
+
+## MA Model
+
+
+
+## ARIMA Model
+
+
+
+## SARIMA Model
+
+
+## Vector Auto Regressive
+
+
+
+## Granger causality (グレンジャー因果)
+
+
+
+## Impulse response function (インパルス応答関数)
+
+
+## State Space Model (状態空間モデル)
+
+
+## ANOVA
+
+
+
+
+
+
+
+
+
+
